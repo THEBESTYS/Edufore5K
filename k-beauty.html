@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-뷰티 - 에듀포레(Edufore)</title>
+    <style>
+        :root {
+            --primary: #C2185B;
+            --secondary: #AD1457;
+            --accent: #E91E63;
+            --light: #FCE4EC;
+            --dark: #880E4F;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 헤더 스타일 */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 30px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .nav-link.active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+        }
+        
+        /* 페이지 헤더 */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 150px 0 80px;
+            text-align: center;
+            margin-top: 70px;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* 콘텐츠 섹션 */
+        .content-section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+        
+        .section-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--primary);
+            border-left: 4px solid var(--accent);
+            padding-left: 15px;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        /* 비전 섹션 */
+        .vision-section {
+            background: var(--secondary);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .vision-section .section-title {
+            color: white;
+        }
+        
+        .vision-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 전략 섹션 */
+        .strategy-section {
+            background: linear-gradient(135deg, #880E4F, #AD1457);
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .strategy-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .strategy-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        /* 푸터 */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">EDU FORE</a>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="k-edu.html" class="nav-link">K-에듀</a></li>
+                    <li class="nav-item"><a href="k-entertainment.html" class="nav-link">K-엔터테인먼트</a></li>
+                    <li class="nav-item"><a href="k-beauty.html" class="nav-link active">K-뷰티</a></li>
+                    <li class="nav-item"><a href="k-food.html" class="nav-link">K-푸드</a></li>
+                    <li class="nav-item"><a href="k-esports.html" class="nav-link">K-e스포츠</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 페이지 헤더 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>K-뷰티</h1>
+            <p>K-콘텐츠 연계 마케팅과 글로벌 유통 전략으로 K-뷰티의 우수성을 세계에 알립니다.</p>
+        </div>
+    </section>
+
+    <!-- 비전 섹션 -->
+    <section class="vision-section">
+        <div class="container">
+            <h2 class="section-title">K-뷰티 비전</h2>
+            <div class="vision-content">
+                <p>K-콘텐츠의 세계적인 인기는 K-뷰티 산업에도 긍정적인 파급 효과를 가져오고 있습니다. 에듀포레는 이러한 영향력을 활용하여 글로벌 시장에서의 경쟁력을 강화하고 새로운 시너지를 창출합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 사업 목표 섹션 -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">사업 목표</h2>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-icon">🌍</div>
+                    <h3 class="card-title">K-콘텐츠의 글로벌 인지도 활용</h3>
+                    <p>한류 콘텐츠의 세계적 인기를 활용하여 K-뷰티 제품의 글로벌 인지도와 신뢰도를 높입니다.</p>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-icon">💪</div>
+                    <h3 class="card-title">글로벌 시장에서의 경쟁력 강화</h3>
+                    <p>혁신적인 제품 개발과 차별화된 마케팅 전략으로 글로벌 뷰티 시장에서의 경쟁력을 강화합니다.</p>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-icon">✨</div>
+                    <h3 class="card-title">신규 시너지 창출</h3>
+                    <p>K-콘텐츠와 K-뷰티의 시너지를 통해 새로운 비즈니스 기회와 수익 모델을 창출합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 마케팅 및 유통 전략 섹션 -->
+    <section class="content-section" style="background-color: #f9f0f5;">
+        <div class="container">
+            <h2 class="section-title">마케팅 및 유통 전략</h2>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3 class="card-title">콘텐츠 연계 마케팅</h3>
+                    <ul>
+                        <li>PPL 및 협찬: 인기 K-드라마, 웹드라마, 웹 예능 등에 뷰티 제품을 PPL하거나 협찬하여 제품 인지도를 높입니다.</li>
+                        <li>인플루언서 및 셀럽 협업: K-콘텐츠를 통해 인기를 얻은 배우, 아이돌, 유튜버 등과의 협업을 통해 제품 홍보 효과를 극대화합니다.</li>
+                        <li>콘텐츠 기반 제품 개발: 특정 K-콘텐츠의 세계관이나 캐릭터에서 영감을 받은 콜라보레이션 제품을 개발합니다.</li>
+                    </ul>
+                </div>
+                
+                <div class="content-card">
+                    <h3 class="card-title">글로벌 유통 전략</h3>
+                    <ul>
+                        <li>주요 시장 집중 공략: 북미(미국), 일본, 인도네시아, 베트남 시장을 중심으로 마케팅 및 유통 역량을 집중합니다.</li>
+                        <li>온라인 판매 플랫폼 구축: 자사 온라인 스토어를 구축하고 아마존, 쇼피파이 등 글로벌 커머스 플랫폼을 통해 전 세계 소비자들이 제품을 쉽게 구매할 수 있도록 합니다.</li>
+                        <li>현지화 마케팅: 각 국가의 문화와 소비 트렌드에 맞춘 현지화 마케팅 전략을 수립합니다.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 시장 동향 섹션 -->
+    <section class="strategy-section">
+        <div class="container">
+            <h2 class="section-title">시장 동향</h2>
+            
+            <div class="strategy-grid">
+                <div class="strategy-item">
+                    <div class="strategy-icon">🥇</div>
+                    <h3>미국 시장 1위</h3>
+                    <p>2024년 기준 한국은 미국 화장품 수입 시장에서 프랑스를 제치고 1위를 차지했습니다.</p>
+                </div>
+                
+                <div class="strategy-item">
+                    <div class="strategy-icon">🏆</div>
+                    <h3>일본 시장 1위</h3>
+                    <p>일본에서도 수입국 1위를 유지하고 있습니다.</p>
+                </div>
+                
+                <div class="strategy-item">
+                    <div class="strategy-icon">📈</div>
+                    <h3>온라인 유통 성장</h3>
+                    <p>온라인 유통 시장은 2023년부터 2030년까지 연평균 11.2% 성장할 것으로 예상됩니다.</p>
+                </div>
+                
+                <div class="strategy-item">
+                    <div class="strategy-icon">💰</div>
+                    <h3>시장 규모 전망</h3>
+                    <p>2025년에는 100억 달러를 초과할 것으로 예상됩니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>에듀포레</h3>
+                    <p>K-컬처의 새로운 물결을 창조하는 글로벌 문화 교육 기업</p>
+                </div>
+                <div class="footer-section">
+                    <h3>연락처</h3>
+                    <p>이메일: danielko@yonsei.ac.kr</p>
+                    <p>전화: +82 10-1234-5678</p>
+                    <p>본사: 서울특별시 용산구 동자동 56 트윈시티남산 2</p>
+                </div>
+                <div class="footer-section">
+                    <h3>사업 분야</h3>
+                    <ul>
+                        <li><a href="k-edu.html">K-에듀</a></li>
+                        <li><a href="k-entertainment.html">K-엔터테인먼트</a></li>
+                        <li><a href="k-beauty.html">K-뷰티</a></li>
+                        <li><a href="k-food.html">K-푸드</a></li>
+                        <li><a href="k-esports.html">K-e스포츠</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 에듀포레. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
