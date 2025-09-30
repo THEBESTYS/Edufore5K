@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-e스포츠 - 에듀포레(Edufore)</title>
+    <style>
+        :root {
+            --primary: #4527A0;
+            --secondary: #5E35B1;
+            --accent: #7E57C2;
+            --light: #F3E5F5;
+            --dark: #311B92;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 헤더 스타일 */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 30px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .nav-link.active {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+        }
+        
+        /* 페이지 헤더 */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 150px 0 80px;
+            text-align: center;
+            margin-top: 70px;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* 콘텐츠 섹션 */
+        .content-section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            color: var(--secondary);
+        }
+        
+        .section-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--primary);
+            border-left: 4px solid var(--accent);
+            padding-left: 15px;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+        
+        /* 비전 섹션 */
+        .vision-section {
+            background: var(--secondary);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .vision-section .section-title {
+            color: white;
+        }
+        
+        .vision-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 데이터 섹션 */
+        .data-section {
+            background: linear-gradient(135deg, #311B92, #5E35B1);
+            color: white;
+            padding: 80px 0;
+        }
+        
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        
+        .data-item {
+            padding: 30px;
+        }
+        
+        .data-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .data-label {
+            font-size: 1.2rem;
+        }
+        
+        /* 기술 섹션 */
+        .tech-section {
+            background-color: #ede7f6;
+            padding: 80px 0;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .tech-item {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .tech-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        /* 푸터 */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">EDU FORE</a>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="k-edu.html" class="nav-link">K-에듀</a></li>
+                    <li class="nav-item"><a href="k-entertainment.html" class="nav-link">K-엔터테인먼트</a></li>
+                    <li class="nav-item"><a href="k-beauty.html" class="nav-link">K-뷰티</a></li>
+                    <li class="nav-item"><a href="k-food.html" class="nav-link">K-푸드</a></li>
+                    <li class="nav-item"><a href="k-esports.html" class="nav-link active">K-e스포츠</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 페이지 헤더 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>K-e스포츠</h1>
+            <p>VR/AR 기술과 e스포츠의 융합으로 새로운 게임 콘텐츠와 경험을 창조합니다.</p>
+        </div>
+    </section>
+
+    <!-- 비전 섹션 -->
+    <section class="vision-section">
+        <div class="container">
+            <h2 class="section-title">K-e스포츠 비전</h2>
+            <div class="vision-content">
+                <p>에듀포레는 K-e스포츠의 성장 잠재력을 인식하고, 교육, 콘텐츠, 플랫폼 등 다양한 영역에서 사업을 확대하여 글로벌 e스포츠 시장을 선도하고자 합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 시장 현황 섹션 -->
+    <section class="content-section">
+        <div class="container">
+            <h2 class="section-title">시장 현황 및 성장 잠재력</h2>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-icon">🚀</div>
+                    <h3 class="card-title">폭발적인 성장세</h3>
+                    <p>2023년 기준 K-e스포츠 관련 시장은 42.7% 성장했습니다.</p>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-icon">📊</div>
+                    <h3 class="card-title">마케팅 파트너십</h3>
+                    <p>K-e스포츠 시장 48.4%의 시장 점유율을 기록하고 있습니다.</p>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">2025년 목표</h3>
+                    <p>K-e스포츠 시장에서 선도적 위치 확보를 목표로 합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 데이터 섹션 -->
+    <section class="data-section">
+        <div class="container">
+            <h2 class="section-title">K-e스포츠 시장 성장</h2>
+            
+            <div class="data-grid">
+                <div class="data-item">
+                    <div class="data-number">42.7%</div>
+                    <div class="data-label">2023년 성장률</div>
+                </div>
+                
+                <div class="data-item">
+                    <div class="data-number">48.4%</div>
+                    <div class="data-label">시장 점유율</div>
+                </div>
+                
+                <div class="data-item">
+                    <div class="data-number">600%</div>
+                    <div class="data-label">2025년 예상 성장</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 추진 전략 섹션 -->
+    <section class="content-section" style="background-color: #f5f0ff;">
+        <div class="container">
+            <h2 class="section-title">K-e스포츠 사업 추진 전략</h2>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <h3 class="card-title">e스포츠 교육 프로그램 개발</h3>
+                    <p>전문적인 e스포츠 선수 양성 및 관련 산업 인력 육성을 위한 교육 프로그램을 개발하고 운영합니다.</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3 class="card-title">e스포츠 콘텐츠 제작 및 유통</h3>
+                    <p>e스포츠 경기 중계, 다큐멘터리, 웹툰 등 다양한 형태의 e스포츠 콘텐츠를 제작하고 글로벌 플랫폼에 유통합니다.</p>
+                </div>
+                
+                <div class="content-card">
+                    <h3 class="card-title">e스포츠 대회 개최 및 스폰서십</h3>
+                    <p>국내외 e스포츠 대회를 개최, 스폰서십에 참여를 통해 브랜드 인지도를 높이고, e스포츠 생태계 활성화에 기여합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 기술 융합 섹션 -->
+    <section class="tech-section">
+        <div class="container">
+            <h2 class="section-title">기술 융합 전략</h2>
+            
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-icon">🕶️</div>
+                    <h3>VR/AR 기술 융합</h3>
+                    <p>가상현실(VR) 및 증강현실(AR) 기술을 활용한 새로운 형태의 e스포츠 콘텐츠를 개발하여 사용자 경험을 혁신합니다.</p>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">🌐</div>
+                    <h3>커뮤니티 플랫폼</h3>
+                    <p>글로벌 e스포츠 팬들을 위한 통합 커뮤니티 플랫폼을 구축하여 팬들과의 상호작용을 강화합니다.</p>
+                </div>
+                
+                <div class="tech-item">
+                    <div class="tech-icon">🎮</div>
+                    <h3>인디게임 글로벌 확장</h3>
+                    <p>한국의 독창적인 인디게임을 글로벌 시장에 소개하고 확장하는 데 주력합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>에듀포레</h3>
+                    <p>K-컬처의 새로운 물결을 창조하는 글로벌 문화 교육 기업</p>
+                </div>
+                <div class="footer-section">
+                    <h3>연락처</h3>
+                    <p>이메일: danielko@yonsei.ac.kr</p>
+                    <p>전화: +82 10-1234-5678</p>
+                    <p>본사: 서울특별시 용산구 동자동 56 트윈시티남산 2</p>
+                </div>
+                <div class="footer-section">
+                    <h3>사업 분야</h3>
+                    <ul>
+                        <li><a href="k-edu.html">K-에듀</a></li>
+                        <li><a href="k-entertainment.html">K-엔터테인먼트</a></li>
+                        <li><a href="k-beauty.html">K-뷰티</a></li>
+                        <li><a href="k-food.html">K-푸드</a></li>
+                        <li><a href="k-esports.html">K-e스포츠</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 에듀포레. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
